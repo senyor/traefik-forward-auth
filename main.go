@@ -147,7 +147,7 @@ func getOidcConfig(oidc string) map[string]interface{} {
 	uri.Path = path.Join(uri.Path, "/.well-known/openid-configuration")
 	res, err := http.Get(uri.String())
 	if err != nil {
-		log.Fatal("failed to get oidc parametere from oidc connect")
+		log.Fatal("failed to get oidc parameters from oidc connect: " + err)
 	}
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
