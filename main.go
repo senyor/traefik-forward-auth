@@ -142,16 +142,16 @@ func handleCallback(w http.ResponseWriter, r *http.Request, qs url.Values,
 func getOidcConfig(oidc string) map[string]interface{} {
 	uri, err := url.Parse(oidc)
 	if err != nil {
-		logger.Fatalf("Failed to parse OIDC string: %v", err)
+		log.Fatalf("Failed to parse OIDC string: %v", err)
 	}
 	uri.Path = path.Join(uri.Path, "/.well-known/openid-configuration")
 	res, err := http.Get(uri.String())
 	if err != nil {
-		logger.Fatalf("Failed to get parameters from OIDC provider: %v", err)
+		log.Fatalf("Failed to get parameters from OIDC provider: %v", err)
 	}
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		logger.Fatalf("Failed to read OIDC parameters response body, %v", err)
+		log.Fatalf("Failed to read OIDC parameters response body, %v", err)
 	}
 	var result map[string]interface{}
 	json.Unmarshal(body, &result)
